@@ -1,5 +1,6 @@
 env = "dev"
 default_vpc_id = "vpc-0d96743e1d7e365b0"
+bastion_cidr   = ["172.31.2.137/32"]
 
 vpc = {
   main = {
@@ -88,5 +89,34 @@ alb = {
     subnets_type = "private_subnet_ids"
     subnets_name = "app"
     internal     = true
+  }
+}
+
+apps = {
+  frontend = {
+    component               = "frontend"
+    vpc_name                = "main"
+    subnets_type            = "private_subnet_ids"
+    subnets_name            = "web"
+    allow_cidr_subnets_type = "public_subnets"
+    allow_cidr_subnets_name = "public"
+    app_port                = 80
+    max_size                = 2
+    min_size                = 1
+    desired_capacity        = 1
+    instance_type           = "t3.micro"
+  }
+  catalogue = {
+    component               = "catalogue"
+    vpc_name                = "main"
+    subnets_type            = "private_subnet_ids"
+    subnets_name            = "app"
+    app_port                = 8080
+    allow_cidr_subnets_type = "private_subnets"
+    allow_cidr_subnets_name = "app"
+    max_size                = 2
+    min_size                = 1
+    desired_capacity        = 1
+    instance_type           = "t3.micro"
   }
 }
