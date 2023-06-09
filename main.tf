@@ -102,7 +102,7 @@ module "apps" {
 // Load Test Machine
 resource "aws_spot_instance_request" "load" {
   instance_type          = "t3.medium"
-  ami                    = "ami-0a017d8ceb274537d"
+  ami                    = "ami-03265a0778a880afb"
   subnet_id              = "subnet-07aaf869a4d807f29"
   vpc_security_group_ids = ["sg-0bdacfeb537d168e0"]
   wait_for_fulfillment   = true
